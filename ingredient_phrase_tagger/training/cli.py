@@ -1,7 +1,6 @@
 import optparse
 
-import labelled_data
-import translator
+from . import labelled_data, translator
 
 
 class Cli(object):

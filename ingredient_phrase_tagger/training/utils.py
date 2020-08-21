@@ -1,23 +1,11 @@
 #!/usr/bin/env python2
 import re
 
-import tokenizer
+from . import tokenizer
 
 
 def joinLine(columns):
     return "\t".join(columns)
-
-
-def clumpFractions(s):
-    """
-    Replaces the whitespace between the integer and fractional part of a quantity
-    with a dollar sign, so it's interpreted as a single token. The rest of the
-    string is left alone.
-
-        clumpFractions("aaa 1 2/3 bbb")
-        # => "aaa 1$2/3 bbb"
-    """
-    return re.sub(r"(\d+)\s+(\d)/(\d)", r"\1$\2/\3", s)
 
 
 def cleanUnicodeFractions(s):
@@ -39,7 +27,7 @@ def cleanUnicodeFractions(s):
         "\x2156": "2/5",
         "\x2157": "3/5",
         "\x2158": "4/5",
-        "\xbc": " 1/4",
+        "\xbc": "1/4",
         "\xbe": "3/4",
         "\x2153": "1/3",
         "\x2154": "2/3",

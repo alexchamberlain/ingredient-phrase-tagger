@@ -1,8 +1,7 @@
 import decimal
 import re
 
-import tokenizer
-import utils
+from . import tokenizer, utils
 
 
 def translate_row(row):
