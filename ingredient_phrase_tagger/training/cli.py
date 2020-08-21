@@ -5,7 +5,6 @@ import translator
 
 
 class Cli(object):
-
     def __init__(self, argv):
         self.opts = self._parse_args(argv)
 
@@ -17,7 +16,7 @@ class Cli(object):
         with open(self.opts.data_path) as data_file:
             data_reader = labelled_data.Reader(data_file)
             for row in data_reader:
-                print translator.translate_row(row).encode('utf-8')
+                print(translator.translate_row(row).encode("utf-8"))
 
     def _parse_args(self, argv):
         """
@@ -26,10 +25,7 @@ class Cli(object):
 
         opts = optparse.OptionParser()
 
-        opts.add_option(
-            "--data-path",
-            default="nyt-ingredients-snapshot-2015.csv",
-            help="(%default)")
+        opts.add_option("--data-path", default="nyt-ingredients-snapshot-2015.csv", help="(%default)")
 
         (options, args) = opts.parse_args(argv)
         return options

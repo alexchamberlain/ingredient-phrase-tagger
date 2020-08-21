@@ -16,15 +16,13 @@ def tokenize(s):
     """
 
     # handle abbreviation like "100g" by treating it as "100 grams"
-    s = re.sub(r'(\d+)g', r'\1 grams', s)
-    s = re.sub(r'(\d+)oz', r'\1 ounces', s)
-    s = re.sub(r'(\d+)ml', r'\1 milliliters', s, flags=re.IGNORECASE)
+    s = re.sub(r"(\d+)g", r"\1 grams", s)
+    s = re.sub(r"(\d+)oz", r"\1 ounces", s)
+    s = re.sub(r"(\d+)ml", r"\1 milliliters", s, flags=re.IGNORECASE)
 
-    american_units = [
-        'cup', 'tablespoon', 'teaspoon', 'pound', 'ounce', 'quart', 'pint'
-    ]
+    american_units = ["cup", "tablespoon", "teaspoon", "pound", "ounce", "quart", "pint"]
     for unit in american_units:
-        s = s.replace(unit + '/', unit + ' ')
-        s = s.replace(unit + 's/', unit + 's ')
+        s = s.replace(unit + "/", unit + " ")
+        s = s.replace(unit + "s/", unit + "s ")
 
-    return filter(None, re.split(r'([,\(\)])?\s*', utils.clumpFractions(s)))
+    return filter(None, re.split(r"([,\(\)])?\s*", utils.clumpFractions(s)))

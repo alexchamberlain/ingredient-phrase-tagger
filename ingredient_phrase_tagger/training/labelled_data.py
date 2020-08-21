@@ -1,6 +1,6 @@
 import unicodecsv
 
-_REQUIRED_COLUMNS = ['input', 'name', 'qty', 'range_end', 'unit', 'comment']
+_REQUIRED_COLUMNS = ["input", "name", "qty", "range_end", "unit", "comment"]
 
 
 class Error(Exception):
@@ -29,9 +29,7 @@ class Reader(object):
         self._csv_reader = unicodecsv.DictReader(data_file)
         for required_column in _REQUIRED_COLUMNS:
             if required_column not in self._csv_reader.fieldnames:
-                raise InvalidHeaderError(
-                    'Data file is missing required column: %s' %
-                    required_column)
+                raise InvalidHeaderError("Data file is missing required column: %s" % required_column)
 
     def __iter__(self):
         return self
@@ -61,18 +59,18 @@ def _parse_row(row):
         }
     """
     # Certain rows have range_end set to empty.
-    if row['range_end'] == '':
+    if row["range_end"] == "":
         range_end = 0.0
     else:
-        range_end = float(row['range_end'])
+        range_end = float(row["range_end"])
 
     return {
-        'input': row['input'],
-        'name': row['name'],
-        'qty': float(row['qty']),
-        'range_end': range_end,
-        'unit': row['unit'],
-        'comment': row['comment'],
+        "input": row["input"],
+        "name": row["name"],
+        "qty": float(row["qty"]),
+        "range_end": range_end,
+        "unit": row["unit"],
+        "comment": row["comment"],
     }
 
 
@@ -80,8 +78,7 @@ class Writer(object):
     """Writes labelled ingredient data to a CSV file."""
 
     def __init__(self, data_file):
-        self._csv_writer = unicodecsv.DictWriter(
-            data_file, fieldnames=_REQUIRED_COLUMNS, lineterminator='\n')
+        self._csv_writer = unicodecsv.DictWriter(data_file, fieldnames=_REQUIRED_COLUMNS, lineterminator="\n")
         self._csv_writer.writeheader()
 
     def writerow(self, row):
